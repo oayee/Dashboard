@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core';
-import {ApplicationModule} from '@angular/core';
+import { ApplicationModule } from './modules/app.module';
 import * as serveStatic from 'serve-static';
 import * as path from 'path';
 import * as express from 'express';
@@ -9,6 +9,8 @@ let s = express();
 
 async function bootstrap() {
   s.use(serveStatic(path.join(__dirname, '../dist')));
+  s.use(serveStatic(path.join(__dirname, '../public')));
+  s.use(serveStatic(path.join(__dirname, '../node_modules/@angular/material/prebuilt-themes')));
 
   const app = await NestFactory.create(ApplicationModule, s);
 
