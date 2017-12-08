@@ -2,8 +2,7 @@
 
 # compiled output
 /dist
-/tmp
-/out-tsc
+/public/static/css/style-new.css
 
 # dependencies
 /node_modules
