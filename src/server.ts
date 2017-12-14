@@ -14,9 +14,10 @@ async function bootstrap() {
 
   const app = await NestFactory.create(ApplicationModule, s);
 
+  app.use(bodyParser.json());
   app.setGlobalPrefix('api');
 
-  app.use(bodyParser.json());
+
 
   app.use((req, res, next) => {
     if(req.originalUrl.startsWith('/api')) {
