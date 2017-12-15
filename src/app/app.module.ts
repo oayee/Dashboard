@@ -5,6 +5,8 @@ import {AppCommonModule} from './core/app-common.module';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatFormFieldModule, MatInputModule, MatTableModule} from '@angular/material';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AppService} from "./app.service";
+import {HttpModule} from "@angular/http";
 
 @NgModule({
   declarations: [
@@ -17,9 +19,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
