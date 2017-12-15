@@ -6,6 +6,7 @@ import {Http} from '@angular/http';
 @Injectable()
 @ResourceParams({url: environment.host})
 export class DashResource extends Resource {
+  protected http: Http;
   constructor(http: Http) {
     super(http);
   }
