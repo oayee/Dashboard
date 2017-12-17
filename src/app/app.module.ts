@@ -7,10 +7,12 @@ import {MatFormFieldModule, MatInputModule, MatTableModule} from '@angular/mater
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AppService} from "./app.service";
 import {HttpModule} from "@angular/http";
+import { TableMainComponent } from './table-main/table-main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    TableMainComponent,
   ],
   imports: [
     BrowserModule,
