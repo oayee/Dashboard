@@ -9,6 +9,7 @@ import {AppService} from "./app.service";
 import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import { MainTableComponent } from './main-table/main-table.component';
+import {CatsService} from "./cats.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,10 @@ import { MainTableComponent } from './main-table/main-table.component';
     MatInputModule,
     MatRadioModule
   ],
-  providers: [AppService],
+  providers: [
+    AppService,
+    CatsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
