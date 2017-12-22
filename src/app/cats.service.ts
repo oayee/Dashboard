@@ -4,18 +4,18 @@ import {ResourceAction, ResourceMethod, ResourceParams} from 'ngx-resource';
 import {RequestMethod} from "@angular/http";
 
 
-interface IDog {
+interface ICat {
   name: string;
   age: number;
   breed: string;
 }
 
 @Injectable()
-@ResourceParams({pathPrefix: 'dogs'})
-export class AppService extends DashResource{
+@ResourceParams({pathPrefix: 'cats'})
+export class CatsService extends DashResource{
   @ResourceAction({method: RequestMethod.Get, isArray: true})
   getCats: ResourceMethod<void, number[]>;
 
   @ResourceAction({method: RequestMethod.Post})
-  setDogs: ResourceMethod<IDog, void>;
+  setCats: ResourceMethod<ICat, void>;
 }
