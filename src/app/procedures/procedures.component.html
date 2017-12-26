@@ -1,0 +1,41 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="filter($event.target.value)" placeholder="Фильтр">
+    </mat-form-field>
+  </div>
+
+  <mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Методика </mat-header-cell>
+      <mat-cell (click)="select(element)" *matCellDef="let element"> {{element.name}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row style="min-width: 10px" *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row style="min-width: 10px" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+
+  <button style="position: relative" (click)="delete()">Удалить</button>
+  <button style="float: left" (click)="update()">Изменить</button>
+  <button style="float: left" (click)="add()">Добавить</button>
+
+</div>

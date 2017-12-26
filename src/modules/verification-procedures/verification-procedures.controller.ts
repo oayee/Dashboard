@@ -25,7 +25,8 @@ export class VerificationProceduresController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string): Promise<any> {
+  async remove(@Param('id') id: ObjectId): Promise<any> {
+    console.log('a');
     return this.verificationProcedureService.remove(id);
   }
 

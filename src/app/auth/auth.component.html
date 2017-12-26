@@ -1,0 +1,17 @@
+<div>
+  <div *ngIf="!register">
+    <mat-form-field class="input-text">
+      <input matInput placeholder="Логин" required [(ngModel)]="user.nickname">
+    </mat-form-field>
+    <mat-form-field class="input-text">
+      <input matInput placeholder="Пароль" required [(ngModel)]="password">
+    </mat-form-field>
+  </div>
+
+  <div class="sign-in" *ngIf="!register">
+    <button mat-raised-button color="primary" (click)="loginUser()">Войти</button>
+  </div>
+  <div class="register" *ngIf="!register">
+    <button mat-raised-button color="primary" (click)="registerUser()">Зарегистрировать</button>
+  </div>
+</div>

@@ -1,23 +1,21 @@
 import { Module } from '@nestjs/common';
 import {AppController} from './app.controller';
-import {DogsController} from './dogs/dogs.controller';
-import {DogsService} from './dogs/dogs.service';
-import {CatsModule} from './cats/cats.module';
 import {NameModule} from './name/name.module';
 import {VerificationProceduresModule} from './verification-procedures/verification-procedures.module';
+import {DevicesModule} from './devices/devices.module';
+import {AuthModule} from './auth/auth.module';
+import {ProfileModule} from "./profile/profile.module";
 
 @Module({
   controllers: [
-    AppController,
-    DogsController
+    AppController
   ],
   modules: [
-    CatsModule,
     NameModule,
-    VerificationProceduresModule
-  ],
-  components: [
-    DogsService
+    VerificationProceduresModule,
+    DevicesModule,
+    AuthModule,
+    ProfileModule
   ]
 })
 export class ApplicationModule {}
