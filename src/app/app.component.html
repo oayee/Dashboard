@@ -1,3 +1,30 @@
-<div>
-  <dash-main-table></dash-main-table>
+<div class="page">
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light bg-inverse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/procedures"
+             routerLinkActive="active">Методики</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users"
+             routerLinkActive="active">Пользователи</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav pull-right">
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="!userService.user" routerLink="/auth/login">Войти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="userService.user" (click)="logout()" >Выйти</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+<router-outlet></router-outlet>
 </div>

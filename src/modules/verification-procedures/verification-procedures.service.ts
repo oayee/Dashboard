@@ -1,13 +1,14 @@
 import { Model, Schema} from 'mongoose';
 import { Component, Inject } from '@nestjs/common';
 import ObjectId = Schema.Types.ObjectId;
-import {VerificationProcedureInterface} from "./interfaces/verification-procedure.interface";
-import {VerificationProcedureDto} from "./dto/verification-procedure.dto";
+import {VerificationProcedureInterface} from './interfaces/verification-procedure.interface';
+import {VerificationProcedureDto} from './dto/verification-procedure.dto';
+import {VerificationProcedureModelToken} from '../constants';
 
 @Component()
 export class VerificationProceduresService {
   constructor(
-    @Inject('VerificationProcedureModelToken') private readonly verificationProcedureModel: Model<VerificationProcedureInterface>
+    @Inject(VerificationProcedureModelToken) private readonly verificationProcedureModel: Model<VerificationProcedureInterface>
   ) {}
 
   async create(verificationProcedureDto: VerificationProcedureDto): Promise<VerificationProcedureInterface> {
@@ -28,7 +29,7 @@ export class VerificationProceduresService {
     return await this.verificationProcedureModel.findByIdAndUpdate(id, verificationProcedureDto, {new: true});
   }
 
-  async remove(id: string) {
-    return await this.verificationProcedureModel.remove({_id: id});
+  async remove(id: ObjectId) {
+    return this.verificationProcedureModel.remove({_id: id});
   }
 }
