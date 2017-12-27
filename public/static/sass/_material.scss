@@ -16,7 +16,7 @@
 
 .mat-table {
   overflow: auto;
-  height: 440px;
+  height: 436px;
 }
 
 .mat-header-row, .mat-row {
@@ -29,4 +29,8 @@
 
 .mat-column-select {
   overflow: initial;
+}
+
+.mat-input-underline {
+  display: none;
 }

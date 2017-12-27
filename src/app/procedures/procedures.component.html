@@ -7,25 +7,27 @@
 
   <mat-table [dataSource]="dataSource">
 
-    <ng-container matColumnDef="select">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()">
-        </mat-checkbox>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()"
-                      (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)">
-        </mat-checkbox>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Методика </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef [style.flex]="'0 0 40px'"></mat-header-cell>
+      <mat-cell *matCellDef="let row; let idx = index" [style.flex]="'0 0 40px'">
+        <button mat-icon-button (click)="editProcedure(row, idx)">
+          <mat-icon>edit</mat-icon>
+        </button>
       </mat-cell>
     </ng-container>
 
-
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Методика </mat-header-cell>
-      <mat-cell (click)="select(element)" *matCellDef="let element"> {{element.name}}</mat-cell>
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef [style.flex]="'0 0 40px'"></mat-header-cell>
+      <mat-cell *matCellDef="let row" [style.flex]="'0 0 40px'">
+        <button mat-icon-button (click)="deleteProcedure(row)">
+          <mat-icon> delete </mat-icon>
+        </button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row style="min-width: 10px" *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -34,8 +36,6 @@
 
   <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
 
-  <button style="position: relative" (click)="delete()">Удалить</button>
-  <button style="float: left" (click)="update()">Изменить</button>
-  <button style="float: left" (click)="add()">Добавить</button>
+  <button mat-raised-button color="primary" (click)="addProcedure()">Добавить</button>
 
 </div>

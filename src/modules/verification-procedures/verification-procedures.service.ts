@@ -13,6 +13,7 @@ export class VerificationProceduresService {
 
   async create(verificationProcedureDto: VerificationProcedureDto): Promise<VerificationProcedureInterface> {
     const createdProcedure = new this.verificationProcedureModel(verificationProcedureDto);
+    console.log('createdDTO: ', createdProcedure);
     return await createdProcedure.save();
   }
 
@@ -30,6 +31,6 @@ export class VerificationProceduresService {
   }
 
   async remove(id: ObjectId) {
-    return this.verificationProcedureModel.remove({_id: id});
+    return this.verificationProcedureModel.remove(  {_id: id});
   }
 }

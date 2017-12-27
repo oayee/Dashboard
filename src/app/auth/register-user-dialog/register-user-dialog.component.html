@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-dialog-content>
+    <mat-card-header>Регистрация</mat-card-header>
+    <mat-form-field style="margin-top: 10px;">
+      <textarea matInput [(ngModel)]="nickname" required placeholder="Имя пользователя"></textarea>
+    </mat-form-field>
+
+    <mat-form-field style="margin-top: 10px;">
+      <textarea matInput [(ngModel)]="name" required placeholder="Имя"></textarea>
+    </mat-form-field>
+
+    <mat-form-field style="margin-top: 10px;">
+      <textarea matInput [(ngModel)]="surname" required placeholder="Фамилия"></textarea>
+    </mat-form-field>
+
+    <mat-form-field style="margin-top: 10px;">
+      <textarea matInput [(ngModel)]="lastname" required placeholder="Отчество"></textarea>
+    </mat-form-field>
+
+    <mat-form-field style="margin-top: 10px;" [class.does-not-match]="!passwordConfirmed">
+      <textarea matInput [(ngModel)]="password" required placeholder="Пароль">
+
+      </textarea>
+    </mat-form-field>
+
+    <mat-form-field style="margin-top: 10px;" [class.does-not-match]="!passwordConfirmed">
+    <textarea matInput [(ngModel)]="passwordConfirmation" required placeholder="Подтвердите пароль"
+              (keyup)="checkPwd($event.target.value)">
+
+    </textarea>
+      <!--<mat-card *ngIf="!passwordConfirmed" style="background-color: red">Пароль не совпадает</mat-card>-->
+    </mat-form-field>
+
+    <br/>
+    <button mat-raised-button style="margin-top: 5px;" color="primary" (click)="register()">Зарегистрироваться</button>
+    <button mat-raised-button style="margin-top: 5px;" color="primary" (click)="close()">Закрыть</button>
+  </mat-dialog-content>
+</mat-card>

@@ -11,6 +11,7 @@ export class VerificationProceduresController {
 
   @Post()
   async create(@Body() verificationProcedureDto: VerificationProcedureDto) {
+    console.log('dto: ', verificationProcedureDto);
     this.verificationProcedureService.create(verificationProcedureDto);
   }
 
@@ -24,9 +25,8 @@ export class VerificationProceduresController {
     return this.verificationProcedureService.findOne(id);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: ObjectId): Promise<any> {
-    console.log('a');
+  @Delete()
+  async remove(@Body('id') id: ObjectId): Promise<any> {
     return this.verificationProcedureService.remove(id);
   }
 

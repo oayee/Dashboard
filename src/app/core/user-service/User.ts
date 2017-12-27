@@ -3,6 +3,10 @@ export const Roles = {
 };
 
 export class User {
+  surname: string;
+  name: string;
+  lastname: string;
   role: number = Roles.ADMIN;
   nickname: string;
+  password: string;
 }

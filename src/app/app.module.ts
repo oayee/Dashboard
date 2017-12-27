@@ -5,6 +5,7 @@ import {AppCommonModule} from './core/app-common.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
+import {AuthGuard} from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {AppRoutingModule} from './app-routing.module';
     AppRoutingModule,
     HttpModule
   ],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

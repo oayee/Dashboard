@@ -1,40 +1,24 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ProceduresService} from './procedures.service';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatPaginator, MatTableDataSource} from '@angular/material';
 import {Procedure} from '../core/interfaces/Procedure';
 import {Dummy} from '../core/Dummy';
-import {SelectionModel} from "@angular/cdk/collections";
+import {ProcedureEditDialogComponent} from './procedure-edit-dialog/procedure-edit-dialog.component';
+import {ProcedureAddDialogComponent} from './procedure-add-dialog/procedure-add-dialog.component';
 
 @Component({
   selector: 'dash-procedures',
   templateUrl: './procedures.component.html'
 })
 export class ProceduresComponent implements OnInit, AfterViewInit {
-  constructor(private proceduresService: ProceduresService) {}
+  constructor(private proceduresService: ProceduresService,
+              public dialog: MatDialog) {}
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['select', 'name'];
+  displayedColumns: string[] = ['name', 'edit', 'delete'];
   dataSource: MatTableDataSource<Procedure>;
   private procedures: Procedure[] = Dummy.factory(Procedure, 10);
-
-  initialSelection = [];
-  allowMultiSelect = true;
-  selection = new SelectionModel<Procedure>(this.allowMultiSelect, this.initialSelection);
-
-  row;
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
-  }
-
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -58,20 +42,31 @@ export class ProceduresComponent implements OnInit, AfterViewInit {
     this.updateTable();
   }
 
-  select(row){
-    this.row = row;
-    console.log(row);
+  addProcedure(){
+    this.dialog.open(ProcedureAddDialogComponent, {
+      width: '500px'
+    }).afterClosed().subscribe(result => {
+      if (result && !!result.name) {
+        this.proceduresService.create({name: result.name}).$observable
+          .subscribe(() => {},() => this.updateTable());
+      }
+    })
   }
 
-  update(){
-    this.proceduresService.update({_id: this.row._id, name: "oaye"}).$observable.subscribe(() => this.updateTable());
+  deleteProcedure(ind: any): void {
+    if (window.confirm('Действительно удалить методику?'))
+      this.proceduresService.delete({id: ind._id}).$observable.subscribe(() => this.updateTable());
   }
 
-  delete(){
-    console.log(this.row._id);
-    this.proceduresService.delete({id: this.row._id}).$observable.subscribe(() => this.updateTable());;
-  }
-  add(){
-    this.proceduresService.create({name: "oaye1"}).$observable.subscribe(() => this.updateTable());;
+  editProcedure(ind: any): void {
+    this.dialog.open(ProcedureEditDialogComponent, {
+      width: '500px',
+      data: { name: ind.name }
+    }).afterClosed().subscribe(result => {
+      if (result && !!result.name) {
+        this.proceduresService.update({id: ind._id, name: result.name}).$observable
+          .subscribe(() => this.updateTable());
+      }
+    })
   }
 }
