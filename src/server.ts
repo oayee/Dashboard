@@ -4,6 +4,7 @@ import * as serveStatic from 'serve-static';
 import * as path from 'path';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import {HttpExceptionFilter} from './modules/exception/http-exception.filter';
 
 let s = express();
 
@@ -16,7 +17,7 @@ async function bootstrap() {
 
   app.use(bodyParser.json());
   app.setGlobalPrefix('api');
-
+  app.useGlobalFilters(new HttpExceptionFilter());
 
 
   app.use((req, res, next) => {

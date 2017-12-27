@@ -9,18 +9,23 @@ export class ProfileController {
 
   @Post()
   async login(@Body() auth: any) {
-    console.log('login');
+    console.log('auth: ', auth);
     return this.profilesService.login(auth);
   }
 
   @Post('register')
   async register(@Body() user: any) {
+    console.log('register: ', user);
     return this.profilesService.register(user);
+  }
+
+  @Get('users')
+  async getUsers() {
+    return this.profilesService.getUsers();
   }
 
   @Get()
   async getUser(@Request() req): Promise<Profile[]> {
-    console.log('1 ', req.user);
     return this.profilesService.getUser(req.user);
   }
 }

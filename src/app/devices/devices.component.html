@@ -13,82 +13,159 @@
     </mat-radio-group>
   </div>
 
-  <mat-table [dataSource]="dataSource">
+  <mat-table [dataSource]="dataSource" style="height: 404px">
 
     <ng-container matColumnDef="client">
-      <mat-header-cell *matHeaderCellDef> client </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <div class="edit">
+          <mat-form-field>
+            <input matInput (keyup)="filter($event.target.value)" placeholder="Организация">
+          </mat-form-field>
+        </div>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.client}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="protocol">
-      <mat-header-cell *matHeaderCellDef> protocol </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Протокол">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.protocol}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef> status </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Статус">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.status}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="svidNum">
-      <mat-header-cell *matHeaderCellDef> svidNum </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="№ свидетельства">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.svidNum}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="povDate">
-      <mat-header-cell *matHeaderCellDef> povDate </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.povDate}}</mat-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Дата поверки">
+        </mat-form-field>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.povDate | date:"dd/MM/yyyy"}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="siName">
-      <mat-header-cell *matHeaderCellDef> siName </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Название СИ">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.siName}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="siModel">
-      <mat-header-cell *matHeaderCellDef> siModel </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Модель">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.siModel}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="siType">
-      <mat-header-cell *matHeaderCellDef> siType </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Тип">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.siType}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="siSerial">
-      <mat-header-cell *matHeaderCellDef> siSerial </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Зав. номер">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.siSerial}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="tempHumidPress">
-      <mat-header-cell *matHeaderCellDef> tempHumidPress </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="t влажн. и давл.">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.tempHumidPress}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="povInterval">
-      <mat-header-cell *matHeaderCellDef> povInterval </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Межпов. интервал">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.povInterval}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="productionDate">
-      <mat-header-cell *matHeaderCellDef> productionDate </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Год выпуска">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.productionDate}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="regNum">
-      <mat-header-cell *matHeaderCellDef> regNum </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Номер реестра">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.regNum}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="povMethod">
-      <mat-header-cell *matHeaderCellDef> povMethod </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>
+        <mat-form-field >
+          <input  matInput (keyup)="filter($event.target.value)" placeholder="Методика поверки">
+        </mat-form-field>
+      </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.povMethod ? element.povMethod.name : null }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef [style.flex]="'0 0 40px'"></mat-header-cell>
+      <mat-cell *matCellDef="let row; let idx = index" [style.flex]="'0 0 40px'">
+        <button mat-icon-button (click)="test(row, idx)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef [style.flex]="'0 0 40px'"></mat-header-cell>
+      <mat-cell *matCellDef="let row" [style.flex]="'0 0 40px'">
+        <button mat-icon-button (click)="test(row)">
+          <mat-icon> delete </mat-icon>
+        </button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 
+  <button mat-raised-button color="primary"> Добавить </button>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
 
 </div>

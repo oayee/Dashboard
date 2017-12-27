@@ -20,8 +20,8 @@ const routes: any[] = [
 })
 export class VerificationProceduresModule {
   configure(consumer: MiddlewaresConsumer): void {
-    consumer.apply(passport.initialize()).with().forRoutes(...routes);
-    consumer.apply(passport.authenticate('jwt', { session: false, failWithError: true})).forRoutes(...routes);
+    // consumer.apply(passport.initialize()).with().forRoutes(...routes);
+    // consumer.apply(passport.authenticate('jwt', { session: false, failWithError: true})).forRoutes(...routes);
   }
 }
 

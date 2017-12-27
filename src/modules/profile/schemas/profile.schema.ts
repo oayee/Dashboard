@@ -11,6 +11,9 @@ export const ProfileSchema = new mongoose.Schema({
     type: String,
     unique: true
   },
+  name: String,
+  surname: String,
+  lastname: String,
   access_token: String
 });
 

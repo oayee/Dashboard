@@ -8,10 +8,8 @@
     </mat-form-field>
   </div>
 
-  <div class="sign-in" *ngIf="!register">
-    <button mat-raised-button color="primary" (click)="loginUser()">Войти</button>
-  </div>
-  <div class="register" *ngIf="!register">
-    <button mat-raised-button color="primary" (click)="registerUser()">Зарегистрировать</button>
+  <div>
+    <button mat-raised-button color="primary"  (click)="loginUser()">Вход</button>
+    <button mat-raised-button color="primary" (click)="registerUser()">Регистрация</button>
   </div>
 </div>

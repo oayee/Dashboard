@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
         if (!user)
           console.log('not user reutrned');
         else {
-          console.log('returened user: ', user.nickname);
+          console.log('returened user: ', user);
           this.userService.setUser(user);
         }
       },

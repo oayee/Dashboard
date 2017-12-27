@@ -11,13 +11,13 @@ export class ProceduresService extends DashResource {
   @ResourceAction({method: RequestMethod.Get, isArray: true})
   getProcedures: ResourceMethod<void, Procedure[]>;
 
-  @ResourceAction({path: '/{!id}', method: RequestMethod.Delete})
-  delete: ResourceMethod<{id: any}, any>;
+  @ResourceAction({method: RequestMethod.Delete})
+  delete: ResourceMethod<{id: string}, any>;
 
   @ResourceAction({method: RequestMethod.Post})
   create: ResourceMethod<{name: string}, any>;
 
-  @ResourceAction({method: RequestMethod.Put})
-  update: ResourceMethod<{_id: any, name: string}, any>;
+  @ResourceAction({path: '/{!id}', method: RequestMethod.Put})
+  update: ResourceMethod<{id: string, name: string}, any>;
 
 }

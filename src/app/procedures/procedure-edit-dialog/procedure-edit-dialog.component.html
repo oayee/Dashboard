@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-header>Изменить методику</mat-card-header>
+  <mat-form-field style="margin-top: 10px;">
+    <textarea matInput [(ngModel)]="name" required placeholder="Методика"></textarea>
+  </mat-form-field>
+
+  <br/>
+  <button mat-raised-button style="margin-top: 5px;" color="primary" (click)="edit()">Изменить</button>
+  <button mat-raised-button style="margin-top: 5px;" color="primary" (click)="close()">Закрыть</button>
+</mat-card>

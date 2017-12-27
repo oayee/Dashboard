@@ -11,6 +11,7 @@ export class ProfileService {
   }
 
   async register(user): Promise<any> {
+    console.log('user: ', user);
     let token = await this.authService.createToken(Object.assign({}, user, {password: undefined}));
     user.access_token = token.access_token;
     const profiles = new this.profilesModel(user);
@@ -18,17 +19,20 @@ export class ProfileService {
   }
 
   async login(auth: {password: string, login: string}): Promise<any> {
-    console.log('service');
+    console.log('auth: ', auth);
     let user = await this.profilesModel.findOne({nickname: auth.login, password: auth.password});
+    console.log('user: ', user);
     if (!user) {
-      console.log('asd');
       throw new BadRequestException();
     }
     return user;
   }
 
+  async getUsers(): Promise<any> {
+    return await this.profilesModel.find().exec();
+  }
+
   public getUser(user) {
-    console.log('Undefined User: ', user);
     return user;
   }
 }
