@@ -7,16 +7,20 @@ import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthGuard} from './guards/auth-guard.service';
 
+
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppCommonModule.forRoot(),
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

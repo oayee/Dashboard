@@ -1,6 +1,6 @@
 <div class="example-container mat-elevation-z8">
   <div class="example-header">
-    <mat-form-field>
+    <mat-form-field ngClass="globalFilter">
       <input matInput (keyup)="filter($event.target.value)" placeholder="Фильтр">
     </mat-form-field>
     <mat-radio-group>
@@ -13,26 +13,26 @@
     </mat-radio-group>
   </div>
 
-  <mat-table [dataSource]="dataSource" style="height: 404px">
+  <mat-table [dataSource]="dataSource" >
 
     <ng-container matColumnDef="client">
       <mat-header-cell *matHeaderCellDef>
-        <div class="edit">
+
           <mat-form-field>
             <input matInput (keyup)="filter($event.target.value)" placeholder="Организация">
           </mat-form-field>
-        </div>
+
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.client}}</mat-cell>
+      <mat-cell *matCellDef="let element; let ind = index;" cellDataName="client"> {{element.client}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="protocol">
-      <mat-header-cell *matHeaderCellDef>
+      <mat-header-cell *matHeaderCellDef >
         <mat-form-field >
           <input  matInput (keyup)="filter($event.target.value)" placeholder="Протокол">
         </mat-form-field>
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.protocol}}</mat-cell>
+        <mat-cell *matCellDef="let element" cellDataName="protocol"> {{element.protocol}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="status">
@@ -146,26 +146,40 @@
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef [style.flex]="'0 0 40px'"></mat-header-cell>
       <mat-cell *matCellDef="let row; let idx = index" [style.flex]="'0 0 40px'">
-        <button mat-icon-button (click)="test(row, idx)">
+        <button mat-icon-button (click)="editRow(row, idx)" *ngIf="idx !== editRowBuffer.idx">
           <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="applyEdit()" *ngIf="idx === editRowBuffer.idx">
+          <mat-icon>check</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef [style.flex]="'0 0 40px'"></mat-header-cell>
-      <mat-cell *matCellDef="let row" [style.flex]="'0 0 40px'">
-        <button mat-icon-button (click)="test(row)">
+      <mat-cell *matCellDef="let row; let idx = index" [style.flex]="'0 0 40px'">
+        <button mat-icon-button (click)="test(row)" *ngIf="idx !== editRowBuffer.idx">
           <mat-icon> delete </mat-icon>
+        </button>
+        <button mat-icon-button (click)="cancelEdit(null)" *ngIf="idx === editRowBuffer.idx">
+          <mat-icon> close </mat-icon>
         </button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let idx = index" [satPopoverAnchorFor]="p"
+             (click)='!((idx === editRowBuffer.idx) && $event.target.hasAttribute("celldataname")) || p.open(); test("test")' >
+
+      <sat-popover #p hasBackdrop  (closed)="test($event)">
+        <app-edit-popover [value]=""></app-edit-popover>
+      </sat-popover>
+    </mat-row>
   </mat-table>
 
-  <button mat-raised-button color="primary"> Добавить </button>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
-
+  <button mat-raised-button color="primary" (click)="createRow()"> Добавить </button>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>
 </div>
+
+
+

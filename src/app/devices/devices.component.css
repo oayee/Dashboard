@@ -1,0 +1,28 @@
+.mat-header-cell, .mat-cell {
+  flex: 0 0 6.9%;
+  min-height: 20px;
+  white-space: nowrap;
+}
+
+.mat-header-row, .mat-row {
+  min-width: 100%;
+  max-width: 100%;
+  overflow:hidden;
+}
+
+.mat-row {
+  min-height: 20px;
+  max-height: 20px;
+}
+
+.globalFilter {
+  height: 30px;
+}
+
+.mat-paginator {
+  max-width:1000px;
+}
+
+.mat-table {
+  height: calc(100vh - 156px)
+}

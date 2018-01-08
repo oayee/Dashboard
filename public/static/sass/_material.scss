@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   min-width: 300px;
+
 }
 
 .example-header {
-  min-height: 64px;
+  height: 64px;
   padding: 8px 24px 0;
 }
 
@@ -13,15 +14,15 @@
   font-size: 14px;
   width: 100%;
 }
-
-.mat-table {
+/*.mat-table {
   overflow: auto;
   height: 436px;
-}
+}*/
 
-.mat-header-row, .mat-row {
+
+/*.mat-header-row, .mat-row {
   min-width: 2350px;
-}
+}*/
 
 .example-container .mat-radio-button {
   margin: 0 5px;
@@ -33,4 +34,13 @@
 
 .mat-input-underline {
   display: none;
+}
+
+devices.ng-star-inserted, .example-container  {
+  height: calc(100vh - 20px);
+  overflow: hidden;
+}
+
+.mat-paginator-container {
+  height: 56px;
 }
