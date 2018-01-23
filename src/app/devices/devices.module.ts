@@ -9,7 +9,7 @@ import {UserService} from '../core/user-service/user.service';
 import {SatPopoverModule} from "@ncstate/sat-popover"
 import {EditPopoverComponent} from "../edit-popover/edit-popover.component";
 import {FormsModule} from "@angular/forms";
-
+import {NamesStringPipe} from "./names-string.pipe"
 
 @NgModule({
   imports:[
@@ -27,7 +27,8 @@ import {FormsModule} from "@angular/forms";
   ],
   declarations:[
     DevicesComponent,
-    EditPopoverComponent
+    EditPopoverComponent,
+    NamesStringPipe
   ],
   providers:[
     DevicesService,

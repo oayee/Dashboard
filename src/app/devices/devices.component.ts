@@ -117,6 +117,11 @@ export class DevicesComponent implements OnInit, AfterViewInit {
     return false;
   }
 
+  prnt() {
+    console.log(this.dataSource.data);
+  }
+
+
 
 
   ngOnInit(): void {

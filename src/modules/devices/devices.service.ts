@@ -9,17 +9,25 @@ import {DeviceDto} from './dto/device.dto';
 export class DevicesService {
   constructor(@Inject(DeviceModelToken) private readonly deviceModel: Model<DeviceInterface>) {}
 
+  private readonly populateOpts = [
+    {path: 'client', select:'name'},
+    {path: 'povMethod', select:'name'},
+    {path: 'gauger', select:'alias'},
+    {path: 'supervisor', select:'alias'},
+    {path: 'ctrlProto', select:'name'},
+  ];
+
   async create(deviceDto: DeviceDto): Promise<DeviceInterface> {
     const createdDevice = new this.deviceModel(deviceDto);
     return await createdDevice.save();
   }
 
   async findAll(): Promise<DeviceInterface[]> {
-    return await this.deviceModel.find().populate('povMethod', 'name').exec();
+    return await this.deviceModel.find().populate(this.populateOpts).exec();
   }
 
   async findOne(id: ObjectId): Promise<DeviceInterface> {
-    return await this.deviceModel.findById(id).populate('povMethod', 'name');
+    return await this.deviceModel.findById(id).populate(this.populateOpts);
   }
 
   async update(id: ObjectId, deviceDto: DeviceDto): Promise<DeviceInterface> {

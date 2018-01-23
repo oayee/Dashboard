@@ -13,7 +13,8 @@ export const ProfileSchema = new mongoose.Schema({
   },
   name: String,
   surname: String,
-  lastname: String,
+  middleName: String,
+  alias: String,
   access_token: String
 });
 

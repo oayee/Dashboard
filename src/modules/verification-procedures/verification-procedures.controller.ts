@@ -11,7 +11,6 @@ export class VerificationProceduresController {
 
   @Post()
   async create(@Body() verificationProcedureDto: VerificationProcedureDto) {
-    console.log('dto: ', verificationProcedureDto);
     this.verificationProcedureService.create(verificationProcedureDto);
   }
 

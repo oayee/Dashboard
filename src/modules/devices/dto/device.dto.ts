@@ -1,16 +1,20 @@
+import {Stati} from "../../../app/core/interfaces/Stati";
+
 export class DeviceDto {
   readonly client: string;
-  readonly protocol: string;
-  readonly status: string;
-  readonly svidNum: number;
-  readonly povDate: Date;
   readonly siName: string;
-  readonly siModel: string;
   readonly siType: string;
+  readonly siModel: string;
   readonly siSerial: string;
-  readonly tempHumidPress: string;
-  readonly povInterval: string;
-  readonly productionDate: string;
-  readonly regNum: string;
+  readonly siProdDate: Date;
+  readonly siRegNum: string;
+  readonly svidNum: number;
+  readonly status: Stati;
+  readonly nextPovDate: Date;
   readonly povMethod: string;
+  readonly povPlace: string;
+  readonly povResult: boolean;
+  readonly gauger: string;
+  readonly supervisor: string;
+  readonly ctrlProto: string[];
 }

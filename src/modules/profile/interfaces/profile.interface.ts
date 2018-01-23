@@ -6,5 +6,6 @@ export interface Profile extends Document {
   readonly nickname: string;
   readonly name: string;
   readonly surname: string;
-  readonly lastname: string;
+  readonly middleName: string;
+  readonly alias: string;
 }

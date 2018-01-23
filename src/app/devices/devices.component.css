@@ -1,13 +1,13 @@
 .mat-header-cell, .mat-cell {
-  flex: 0 0 6.9%;
+/*  flex: 0 0 6.9%;*/
   min-height: 20px;
   white-space: nowrap;
 }
 
 .mat-header-row, .mat-row {
   min-width: 100%;
-  max-width: 100%;
-  overflow:hidden;
+
+
 }
 
 .mat-row {

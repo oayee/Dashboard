@@ -5,6 +5,8 @@ import {VerificationProceduresModule} from './verification-procedures/verificati
 import {DevicesModule} from './devices/devices.module';
 import {AuthModule} from './auth/auth.module';
 import {ProfileModule} from "./profile/profile.module";
+import {ClientsModule} from "./clinets/clients.module";
+import {PrototypesModule} from "./prototypes/prototype.module";
 
 @Module({
   controllers: [
@@ -15,7 +17,10 @@ import {ProfileModule} from "./profile/profile.module";
     VerificationProceduresModule,
     DevicesModule,
     AuthModule,
-    ProfileModule
+    ProfileModule,
+    ClientsModule,
+    PrototypesModule
   ]
 })
 export class ApplicationModule {}
+

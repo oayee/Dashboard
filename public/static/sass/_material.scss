@@ -38,7 +38,7 @@
 
 devices.ng-star-inserted, .example-container  {
   height: calc(100vh - 20px);
-  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .mat-paginator-container {

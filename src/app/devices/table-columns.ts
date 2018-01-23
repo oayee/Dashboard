@@ -1,6 +1,3 @@
 export const columns = [
-  'client', 'protocol', 'status', 'svidNum',
-  'povDate', 'siName', 'siModel', 'siType',
-  'siSerial', 'tempHumidPress', 'povInterval',
-  'productionDate', 'regNum', 'povMethod', 'edit', 'delete'
+  'client', 'accDate', 'siName', 'siType', 'siModel', 'siSerial', 'siProdDate', 'siRegNum', 'svidNum', 'povDate', 'nextPovDate', 'povMethod', 'povPlace', 'povResult', 'gauger', 'supervisor', 'ctrlProto', 'edit', 'delete'
 ];
