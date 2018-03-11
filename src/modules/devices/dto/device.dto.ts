@@ -1,6 +1,8 @@
 import {Stati} from "../../../app/core/interfaces/Stati";
 
+
 export class DeviceDto {
+  readonly _id: string;
   readonly client: string;
   readonly siName: string;
   readonly siType: string;

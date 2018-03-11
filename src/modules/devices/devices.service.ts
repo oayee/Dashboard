@@ -30,8 +30,8 @@ export class DevicesService {
     return await this.deviceModel.findById(id).populate(this.populateOpts);
   }
 
-  async update(id: ObjectId, deviceDto: DeviceDto): Promise<DeviceInterface> {
-    return await this.deviceModel.findByIdAndUpdate(id, deviceDto, {new: true});
+  async update(deviceDto: DeviceDto): Promise<DeviceInterface> {
+    return await this.deviceModel.findByIdAndUpdate(deviceDto._id, deviceDto, {new: true});
   }
 
   async remove(id: string) {

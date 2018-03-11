@@ -4,10 +4,19 @@
   white-space: nowrap;
 }
 
+
 .mat-header-row, .mat-row {
   min-width: 100%;
+}
 
+button.mat-icon-button {
+  line-height: 20px;
+  height: 20px;
+  width: 20px;
+}
 
+button:focus {
+  outline: none;
 }
 
 .mat-row {

@@ -1,3 +1,5 @@
+import {IDevice} from "../app/core/interfaces/IDevice";
+
 export const DbConnectionToken = 'DbConnectionToken';
 
 export const VerificationProcedureModelToken = 'VerificationProcedureModelToken';

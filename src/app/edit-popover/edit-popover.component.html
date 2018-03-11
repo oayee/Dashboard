@@ -1,12 +1,31 @@
 <form (ngSubmit)="onSubmit()">
-  <div class="mat-subheading-2">EDIT</div>
+  <div class="mat-subheading-2">Редактироваие</div>
 
-  <mat-form-field>
-    <input matInput  name="newValue" [(ngModel)]="newValue">
+  <mat-form-field *ngIf="type==='text'">
+    <input matInput  name="newValue" [(ngModel)]="newValue" placeholder="{{name}}">
   </mat-form-field>
 
+  <mat-form-field *ngIf="type==='date'">
+    <input matInput [matDatepicker]="picker" placeholder="{{name}}" name="newValue" [(ngModel)]="newValue" disabled>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker disabled="false"></mat-datepicker>
+  </mat-form-field>
+
+
+    <mat-radio-group  *ngIf="type==='status'" fxLayout="column" >
+      <mat-radio-button *ngFor="let statusName of statusNames" [checked]="statuses[statusName] === value?.curStatus" [value]="statuses[statusName]">
+        <mat-form-field>
+          <input matInput [matDatepicker]="statusPicker" placeholder="{{statuses[statusName]}}" name="{{statusName}}" [(ngModel)]='newValue[statusName]' disabled>
+          <mat-datepicker-toggle matSuffix [for]="statusPicker"></mat-datepicker-toggle>
+          <mat-datepicker #statusPicker disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </mat-radio-button>
+    </mat-radio-group>
+
+
   <div class="actions">
-    <button mat-button type="button" color="primary" (click)="onCancel()">CANCEL</button>
-    <button mat-button type="submit" color="primary">SAVE</button>
+    <button mat-button type="button" color="primary" (click)="onCancel()">Отмена</button>
+    <button mat-button type="submit" color="primary">Сохранить</button>
+
   </div>
 </form>

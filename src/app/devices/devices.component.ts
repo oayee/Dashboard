@@ -7,7 +7,6 @@ import {Dummy} from '../core/Dummy';
 import { status } from './statuses';
 import {UserService} from '../core/user-service/user.service';
 
-
 @Component({
   selector: 'devices',
   styleUrls: ['./devices.component.css'],
@@ -24,9 +23,6 @@ export class DevicesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = columns;
   dataSource: MatTableDataSource<IDevice>;
   private devices: IDevice[] = Dummy.factory(IDevice, 10);
-
-
-
   filterOptions: string = '';
   filterString: string = '';
 
@@ -53,11 +49,17 @@ export class DevicesComponent implements OnInit, AfterViewInit {
     })
   }
 
-  deleteRow(idx: number): void {
-    //TODO: delete row from DB
-
-    this.dataSource.data.splice(idx, 1);
-    this.dataSource._updateChangeSubscription();
+  deleteRow(id: string): void {
+    //TODO: fix this shit
+    if (confirm('Удалить запись?')){
+      this.devicesService.delete({id: id})
+        .$observable.subscribe(
+        () => {
+           this.dataSource._updateChangeSubscription();
+        },
+      (err) => console.log(err)
+      );
+    }
   }
 
   createRow(): void {
@@ -67,9 +69,10 @@ export class DevicesComponent implements OnInit, AfterViewInit {
       }
     }
     this.editRowBuffer = { idx: null, data: null};
+    this.editRowBuffer.idx = 0;
     this.dataSource.data.unshift(new IDevice());
     this.dataSource._updateChangeSubscription();
-    this.editRowBuffer.idx = 0;
+
   }
 
   test(...args: any[]): void {
@@ -94,9 +97,22 @@ export class DevicesComponent implements OnInit, AfterViewInit {
   }
 
   applyEdit(): void {
-    //TODO: save row changes to DB
+    let editedRow = this.dataSource.data[this.editRowBuffer.idx] as any;
+    delete editedRow.$resource;
+    if ( this.editRowBuffer.data === null) {  //saving new row
+      this.devicesService.create({entry: editedRow})
+        .$observable.subscribe(
+        () => { this.editRowBuffer = { idx: null, data: null}; },
+        (err) => {console.log(err);}
+      );
+    }else{     //updating existing row
+      this.devicesService.update({entry: editedRow})
+        .$observable.subscribe(
+          () => { this.editRowBuffer = { idx: null, data: null}; },
+          (err) => {console.log(err);}
+        );
+    }
 
-    this.editRowBuffer = { idx: null, data: null};
   }
 
   open(p: any): void {
@@ -106,11 +122,11 @@ export class DevicesComponent implements OnInit, AfterViewInit {
   cancelEdit(): boolean {
     if (confirm("Отменить изменеия?")){
       if (this.editRowBuffer.data === null){    //if true, the editable row was newly added and needs to be deleted
-        this.deleteRow(this.editRowBuffer.idx);
+        this.dataSource.data.splice(this.editRowBuffer.idx, 1);
       }else{                                    //else revert changes
         this.dataSource.data[this.editRowBuffer.idx] = this.editRowBuffer.data;
-        this.dataSource._updateChangeSubscription();
       }
+      this.dataSource._updateChangeSubscription();
       this.editRowBuffer.idx = null;
       return true;
     }

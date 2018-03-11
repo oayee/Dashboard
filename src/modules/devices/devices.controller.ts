@@ -10,8 +10,8 @@ export class DevicesController {
   constructor(private readonly devicesService: DevicesService) {}
 
   @Post()
-  async create(@Body() deviceDto: DeviceDto) {
-    this.devicesService.create(deviceDto);
+  async create(@Body('entry') deviceDto: DeviceDto) {
+    return this.devicesService.create(deviceDto);
   }
 
   @Get()
@@ -24,13 +24,13 @@ export class DevicesController {
     return this.devicesService.findOne(id);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string): Promise<any> {
+  @Delete()
+  async remove(@Body('id') id: string): Promise<any> {
     return this.devicesService.remove(id);
   }
 
-  @Put(':id')
-  async update(@Param('id') id: ObjectId, @Body() deviceDto: DeviceDto): Promise<DeviceInterface> {
-    return this.devicesService.update(id, deviceDto);
+  @Put()
+  async update(@Body('entry') deviceDto: DeviceDto): Promise<DeviceInterface> {
+    return this.devicesService.update(deviceDto);
   }
 }

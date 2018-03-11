@@ -1,7 +1,10 @@
 import {NgModule} from '@angular/core';
 import {DevicesService} from './devices.service';
-import { MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatPaginatorModule, MatRadioModule,
-  MatTableModule} from '@angular/material';
+import {
+  MAT_DATE_LOCALE, MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatIconModule,
+  MatInputModule,
+  MatNativeDateModule, MatPaginatorModule, MatRadioModule, MatTableModule
+} from '@angular/material';
 import {DevicesComponent} from './devices.component';
 import {DevicesRoutingModule} from './devices-routing.module';
 import {CommonModule} from '@angular/common';
@@ -10,6 +13,7 @@ import {SatPopoverModule} from "@ncstate/sat-popover"
 import {EditPopoverComponent} from "../edit-popover/edit-popover.component";
 import {FormsModule} from "@angular/forms";
 import {NamesStringPipe} from "./names-string.pipe"
+import {FlexLayoutModule} from "@angular/flex-layout";
 
 @NgModule({
   imports:[
@@ -23,7 +27,10 @@ import {NamesStringPipe} from "./names-string.pipe"
     MatButtonModule,
     MatIconModule,
     SatPopoverModule,
-    FormsModule
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FlexLayoutModule
   ],
   declarations:[
     DevicesComponent,
@@ -31,8 +38,10 @@ import {NamesStringPipe} from "./names-string.pipe"
     NamesStringPipe
   ],
   providers:[
+    {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},
     DevicesService,
-    UserService
+    UserService,
+
   ]
 })
 export class DevicesModule {}

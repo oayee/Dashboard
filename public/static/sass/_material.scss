@@ -36,6 +36,7 @@
   display: none;
 }
 
+
 devices.ng-star-inserted, .example-container  {
   height: calc(100vh - 20px);
   overflow-y: hidden;
@@ -43,4 +44,8 @@ devices.ng-star-inserted, .example-container  {
 
 .mat-paginator-container {
   height: 56px;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
 }

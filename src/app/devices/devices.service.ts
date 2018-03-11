@@ -11,4 +11,12 @@ export class DevicesService extends DashResource {
   @ResourceAction({method: RequestMethod.Get, isArray: true})
   getDevices: ResourceMethod<void, IDevice[]>;
 
+  @ResourceAction({method: RequestMethod.Post})
+  create: ResourceMethod<{entry:IDevice}, any>;
+
+  @ResourceAction({method: RequestMethod.Put})
+  update: ResourceMethod<{entry:IDevice}, any>;
+
+  @ResourceAction({method: RequestMethod.Delete})
+  delete: ResourceMethod<{id: string}, any>;
 }

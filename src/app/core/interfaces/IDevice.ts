@@ -1,16 +1,22 @@
+import {Stati} from "./Stati";
+
 export class IDevice {
+  _id: string;
   client: string;
-  protocol: string;
-  status: number;
-  svidNum: number;
-  povDate: Date;
   siName: string;
-  siModel: string;
   siType: string;
+  siModel: string;
   siSerial: string;
-  tempHumidPress: string;
-  povInterval: string;
-  productionDate: string;
-  regNum: string;
+  siProdDate: string;
+  siRegNum: string;
+  svidNum: number;
+  status: Stati;
+  nextPovDate: Date;
   povMethod: string;
+  povPlace: string;
+  povResult: boolean;
+  gauger: string;
+  supervisor: string;
+  ctrlProto: string;
 }
+

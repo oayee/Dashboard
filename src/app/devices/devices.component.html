@@ -24,22 +24,36 @@
       <mat-cell *matCellDef="let element; let ind = index;" > {{element.client?.name}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="accDate">
+    <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef>
-        <mat-form-field >
-          <input  matInput (keyup)="filter($event.target.value)" placeholder="Дата приёмки">
+        <mat-form-field>
+          <input matInput (keyup)="filter($event.target.value)" placeholder="Статус">
         </mat-form-field>
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status?.accepted | date:"dd/MM/yyyy"}}</mat-cell>
+      <mat-cell *matCellDef="let element; let ind = index;" [satPopoverAnchorFor]="statusPopover"
+                (click)="statusPopover.open()"> {{element.status?.curStatus}}
+
+        <sat-popover #statusPopover hasBackdrop  (closed)="!$event || element.status = $event">
+          <app-edit-popover [value]="element.status" [name]="'Cтатус'" [type]="'status'"></app-edit-popover>
+        </sat-popover>
+
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="siName">
       <mat-header-cell *matHeaderCellDef>
-        <mat-form-field >
+        <mat-form-field>
           <input  matInput (keyup)="filter($event.target.value)" placeholder="Название СИ">
         </mat-form-field>
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.siName}}</mat-cell>
+      <mat-cell *matCellDef="let element; let ind = index" [satPopoverAnchorFor]="namePopover"
+                (click)="ind !== editRowBuffer.idx || namePopover.open()"> {{element.siName}}
+
+        <sat-popover #namePopover hasBackdrop  (closed)="!$event || element.siName = $event">
+          <app-edit-popover [value]="element.siName" [name]="'Название СИ'" [type]="'text'"></app-edit-popover>
+        </sat-popover>
+
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="siType">
@@ -96,14 +110,6 @@
       <mat-cell *matCellDef="let element"> {{element.svidNum}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="povDate">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-form-field >
-          <input  matInput (keyup)="filter($event.target.value)" placeholder="Дата поверки">
-        </mat-form-field>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status?.processed | date:"dd/MM/yyyy"}}</mat-cell>
-    </ng-container>
 
     <ng-container matColumnDef="nextPovDate">
       <mat-header-cell *matHeaderCellDef>
@@ -111,7 +117,14 @@
           <input  matInput (keyup)="filter($event.target.value)" placeholder="Дата след. поверки">
         </mat-form-field>
       </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.nextPovDate | date:"dd/MM/yyyy"}}</mat-cell>
+      <mat-cell *matCellDef="let element; let ind=index" [satPopoverAnchorFor]="npdPopover"
+                (click)="ind !== editRowBuffer.idx || npdPopover.open()"> {{element.nextPovDate | date:"dd/MM/yyyy"}}
+
+        <sat-popover #npdPopover hasBackdrop  (closed)="!$event || element.nextPovDate = $event">
+          <app-edit-popover [value]="element.nextPovDate" [name]="'Дата след. поверки'" [type]="'date'"></app-edit-popover>
+        </sat-popover>
+
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="povMethod">
@@ -183,23 +196,17 @@
     <ng-container matColumnDef="delete">
       <mat-header-cell *matHeaderCellDef [style.flex]="'0 0 40px'"></mat-header-cell>
       <mat-cell *matCellDef="let row; let idx = index" [style.flex]="'0 0 40px'">
-        <button mat-icon-button (click)="test(row)" *ngIf="idx !== editRowBuffer.idx">
+        <button mat-icon-button  (click)="deleteRow(row._id)" *ngIf="idx !== editRowBuffer.idx">
           <mat-icon> delete </mat-icon>
         </button>
-        <button mat-icon-button (click)="cancelEdit(null)" *ngIf="idx === editRowBuffer.idx">
+        <button mat-icon-button (click)="cancelEdit()" *ngIf="idx === editRowBuffer.idx">
           <mat-icon> close </mat-icon>
         </button>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns; let idx = index" [satPopoverAnchorFor]="p"
-             (click)='prnt()' >
-
-      <sat-popover #p hasBackdrop  (closed)="test($event)">
-        <app-edit-popover [value]=""></app-edit-popover>
-      </sat-popover>
-    </mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns; let idx = index" (click)="test(row)"> </mat-row>
   </mat-table>
 
   <button mat-raised-button color="primary" (click)="createRow()"> Добавить </button>
